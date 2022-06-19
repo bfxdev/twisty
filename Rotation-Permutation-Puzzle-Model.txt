@@ -1,0 +1,271 @@
+
+                           Universal Rotation Permutation Puzzle Pronounceable Notation
+                           ------------------------------------------------------------
+
+
+Definition of Rotation Permutation Puzzle
+-----------------------------------------
+
+Rotation Permutation Puzzle defined as such:
+ - One solid object
+ - Set of rotation surfaces, defined by an oriented axis and a revolution surface around this axis
+ - Each revolution surface cuts the object in two parts, each part being able to turn relative to the other around the related axis
+ - The object is partitioned into different pieces by the set of n rotation surfaces, with a maximum of 2^n different pieces
+ - If a subset of k surfaces do not intersect (e.g. parallel planes), the surfaces cut the object into k+1 sub-blocks (not 2^k)
+    hence reducing the number of resulting pieces      
+ - The set of rotation surfaces contain tuples of 3 surfaces (A,B,C) such that B equals globally C (i.e. C or C inverted for a plane)
+    after rotation around the axis of A (angle less than 2*PI)
+ - There is a finite number of possible rotation angles for each axis 
+
+Example of the 2x2x2 cube:
+ - Primary object is a cube
+ - Three rotation surfaces: planes through (0,0,0) in X, Y and Z directions named respectively R, T and F
+ - All surfaces are intersecting, hence maximum number of 2^3=8 pieces is reached
+ - Rotation around X plane anti-clockwise cycles surfaces as following: Y -> Z -> Y inv -> Z inv -> Y 
+
+
+Example of the 3x3x3 cube:
+ - 6 rotation surfaces, one in each directions: X, -X, Y, -Y, Z, -Z
+ - 3 subsets of 2 non-intersecting surfaces: (X, -X), (Y, -Y), (Z, -Z)  
+ - Upper bound of number of pieces based on number of surfaces: 2^6 = 64
+ - Real number of pieces reflecting non-intersecting surfaces, i.e. 3 subsets of k=2 surfaces: (k+1)*(k+1)*(k+1) = 3*3*3 = 27
+ - Number of visible pieces (all except central piece): 26
+ 
+
+Pronounceable Notation 
+---------------------
+
+One or more letter for each rotation surface: Top, Down, Right, Left, Front, Back, Back-Left (BL), etc
+
+One specific letter for rotation direction:
+ - E: clockwise
+ - A: anti-clockwise
+
+Zero or one specific letter:
+ - Nothing: regular rotation, i.e. turn all pieces above rotation surface
+ - U: turn Under, i.e. turn all pieces below rotation surface
+ - O: blOck turn, i.e. turn all pieces together around axis of rotation surface
+ - I: slIce turn, i.e. turn pieces above rotation surface and below next rotation surface 
+
+Example moves for 3x3x3:
+ - Simple SAM: RE TA RA TE
+ - Cycle 3 corners on upper layer: RA TE LE TA RE TE LA TA
+ - Cycle 3 edges on upper layer: RE TE RA TE RE TE TE RA
+
+
+
+Position Matrix Notation
+------------------------
+
+The state of a puzzle with n rotation surfaces and m pieces can be represented by one matrix such that:
+ - m columns, one for each existing piece
+ - n lines representing the sign of the position of each piece relative to surface, 0 if over surface, 1 under surface
+
+For a 2x2x2 cube, the position matrix can be represented as following:
+
+ 000 001 010 011 100 101 110 111
+
+| 0   0   0   0   1   1   1   1 |    X       
+| 0   0   1   1   0   0   1   1 |    Y
+| 0   1   0   1   0   1   0   1 |    Z
+
+The matrix can be noted in a compact way as a bit map, writing each column as a bits sequence:
+
+  01234567
+ ----------
+| 00001111 | X
+| 00110011 | Y
+| 01010101 | Z
+ ----------
+
+Each slice of the 2x2x2 cube can be represented as such:
+
+    X >
+    ^ y
+    |
+ 10 | 00  x  ^
+----+----->  Y
+ 11 | 01
+    |
+
+
+For most puzzles, (e.g. with non-intersecting surfaces), not all columns are used. Some combinations are
+ not possible with non-intersecting surfaces, e.g. a piece cannot be located above 2 parallel planes at the same
+ time i.e. the bits sequence 00 is not possible. Some pieces are not visible.
+
+For the 3x3x3 cube, we start with the full list of positions not taking non-intersecting surfaces into
+ account with marked real pieces ("#"), i.e. where relative position of 2 consecutive surfaces are not 00 (marked as "+")
+
+|                 ++++++++++++++++++++++++++++++++++++++++++++++++ |
+| 0000000000000000000000000000000011111111111111111111111111111111 |  X
+| 0000000000000000111111111111111100000000000000001111111111111111 | -X
+|                                                                  |
+|     ++++++++++++    ++++++++++++    ++++++++++++    ++++++++++++ |
+| 0000000011111111000000001111111100000000111111110000000011111111 |  Y
+| 0000111100001111000011110000111100001111000011110000111100001111 | -Y
+|                                                                  |
+|  +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ |
+| 0011001100110011001100110011001100110011001100110011001100110011 |  Z
+| 0101010101010101010101010101010101010101010101010101010101010101 | -Z
+
+                  ++++++++++++++++++++++++++++++++++++++++++++++++ 
+      ++++++++++++    ++++++++++++    ++++++++++++    ++++++++++++
+   +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++
+  ----------------------------------------------------------------
+  .....................###.###.###.....###.###.###.....###.###.##O
+                       ABC DEF GHI     JKL MNO PQR     STU VWX YZ      
+  0000000000111111111122222222223333333333444444444455555555556666                    
+  0123456789012345678901234567890123456789012345678901234567890123                     
+
+
+A slice of the 3x3x3 cube can be represented as such:
+
+ < X- D      C X+ >
+      |      |      
+ 0110 | 0111 | 0101
+      |      |       ^
+------+------+------ A Y+
+      |      |      
+ 1110 | 1111 | 1101
+      |      |      
+------+------+------ B Y-
+      |      |       V
+ 1010 | 1011 | 1001 
+
+
+A slice of the 4x4x4 cube can be represented as such:
+
+         F>        E>        D>   
+         |         |         |
+ 000 111 | 000 110 | 000 100 | 000 000      
+         |         |         |
+---------+---------+---------+--------- A^
+         |         |         |
+ 100 111 | 100 110 | 100 100 | 100 000      
+         |         |         |
+---------+---------+---------+--------- B^
+         |         |         |
+ 110 111 | 110 110 | 110 100 | 110 000      
+         |         |         |
+---------+---------+---------+--------- C^
+         |         |         |
+ 111 111 | 111 110 | 111 100 | 111 000      
+         |         |         |
+
+
+
+
+
+
+Rotations with the position matrix
+----------------------------------
+
+Rotations are identified by the tuples of related rotation surfaces. Around the axis of each surface,
+  a surface is transformed into another one, possibly with inversion. Each surface is oriented.
+
+For the 2x2x2 cube, represented with anti-clockwise turn around X:
+
+        ^
+        | Y
+     +--|-+----+
+    /   |/    /| 
+   +----+----+0|
+  /    /    /|1+       /\
+ +----+----+0|/|  X   |  
+ |    |    |0+1-----> |  ^
+ |    |    |/|1+      |  |
+ +----+----+1|/        \/
+ |   /|    |0+
+ |  / |    |/
+ +-/--+----+
+  / Z
+ L
+
+
+The tuples for anti-clockwise rotations can be described as:
+ - Around X: Y -> Z -> -Y -> -Z -> Y
+ - Around Y: Z -> X -> -Z -> -X -> Z
+ - Around Z: X -> Y -> -X -> -Y -> X
+
+For clockwise rotations, the sequence of surfaces can be obtained by reversing the sequences defined for anti-clockwise.
+
+In order to simplify the notation, the surfaces are referenced by their index from 1 to n.
+
+A rotation around the surface of index a, with additional surfaces in the tuples of index s1..sk, can be defined as such:
+ - Impact only on pieces for which the bit at index a is 0
+ - Impacted pieces keep their bit at index a to 0
+ - If all surfaces are intersecting at origin, bits are swapped according to a Gray code
+ 
+
+Around a: s1 -> s2 -> (-) s1 -> (-) s2 -> s1
+
+| 0   0   1   1  |    Y s1 
+| 0   1   0   1  |    Z s2
+
+| 1   0   1   0  |    Y s1
+| 0   0   1   1  |    Z s2
+
+
+ 000 001 010 011 100 101 110 111
+ -------------------------------
+| X   X   X   X   X   X   X   X |    X
+| 0   0   1   1   X   X   X   X |    Y
+| 0   1   0   1   X   X   X   X |    Z
+
+              |
+              V
+
+| X   X   X   X   X   X   X   X |    X
+| 1   0   1   0   X   X   X   X |    Y
+| 0   0   1   1   X   X   X   X |    Z
+
+Rotations can be represented as permutations of numbers, recognized by their values, each number representing a piece.
+
+For example with 2x2x2 cube:
+ - Rotation RA (X anti-clockwise): 0 -> 1 -> 3 -> 2
+ - 4 x RA: 01234567 -> 13024567 -> 32104567 -> 20314567 -> 01234567
+
+
+Model of the 3x3x3 cube
+-----------------------
+
+Picture of the cube:
+
+                   A
+                   | \_/
+                   |  |
+                   |
+          +-------+|------+-------+
+         /       / |     /       /|
+        +-------+--|----+-------+ |
+       /       /      /       / | |
+      +-------+-------+-------+ | +
+     /       /       /       /| |/|
+    +-------+-------+-------+ | + |
+    |       |       |       | |/| |
+    |       |       |       | + | +
+    |       |       |       |/| -------->
+    +-------+-------+-------+ | + |  \/
+    |       |       |       | |/| |  /\
+    |       |       |       | + | +
+    |       |  /    |       |/| |/
+    +-------+-/-----+-------+ | +
+    |       |/      |       | |/
+    |       /       |       | +
+    |      /|       |       |/
+    +-----/-+-------+-------+
+         /    __
+        /      /
+       L      /_
+
+
+Pieces: 21,22,23, 25,26,27, 29,30,31,  37,38,39, 41,42,43, 45,46,47,  53,54,55, 57,58,59, 61,62,63
+
+
+Modulo Rotation Notation
+------------------------
+
+Assumption that all 2^n pieces are present.
+
+To be continued...
+
