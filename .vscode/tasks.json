@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build pdoc Documentation",
+			"type": "shell",
+			"command": "pdoc --output-dir docs_api -d markdown --show-source --mermaid --math cube.py",
+			"group": "build",
+			"problemMatcher": [],
+			"isBackground": false
+		}
+	]
+}
