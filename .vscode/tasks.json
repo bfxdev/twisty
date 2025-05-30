@@ -1,13 +1,21 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Build pdoc Documentation",
-			"type": "shell",
-			"command": "pdoc --output-dir docs_api -d markdown --show-source --mermaid --math cube.py",
-			"group": "build",
-			"problemMatcher": [],
-			"isBackground": false
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build pdoc Documentation",
+            "type": "shell",
+            "command": "pdoc -d markdown --show-source --mermaid --math --output-dir doc-generated-pdoc cube.py",
+            "group": "build",
+            "problemMatcher": [],
+            "isBackground": false
+        },
+        {
+            "label": "Build Sphinx Documentation",
+            "type": "shell",
+            "command": "sphinx-build -b html doc-source-sphinx doc-generated-sphinx",
+            "group": "build",
+            "problemMatcher": [],
+            "isBackground": false
+        }
+    ]
 }

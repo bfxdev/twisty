@@ -1,6 +1,7 @@
 sphinx
 myst-parser
-sphinx-autodoc-typehints
+sphinx-autodoc2
 sphinx-rtd-theme
 sphinxcontrib-mermaid
+pdoc
 
