@@ -15,6 +15,8 @@ author = 'bfxdev'
 extensions = [
     "myst_parser",
     "autodoc2",
+    "sphinx.ext.autodoc",
+    "sphinxcontrib.mermaid"
 ]
 
 autodoc2_packages = [
@@ -27,7 +29,7 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 
 html_theme = 'alabaster'
-# html_static_path = ['_static']
+#html_static_path = ['_static']
 
 # -- MyST configuration ------------------------------------------------------
 
@@ -36,8 +38,5 @@ myst_enable_extensions = [
     "deflist",
     "html_admonition",
     "html_image",
-    "linkify",
-    "substitution",
-    "smartquotes",
-    "restructuredtext",  # Enable reStructuredText directives in Markdown
+    "restructuredText",
 ]
