@@ -1,5 +1,13 @@
 
+# Twisty!
 
+This is a list of things I had in mind while thinking about how to learn solving the Rubik's cube and how to help to solve other twisty puzzles.
+
+Many papers exist on twisty puzzles, most often to give an example for group theory, but this is not really helping to solve the cube or to assess if a resolution method may lead to annoying parity cases, and how to avoid such cases from the beginning.
+
+The idea of the software would be to provide a way to describe _completely_ any given resolution methods, in order to ease learning such methods and to test if the method has flaws.
+
+This needs to be articulated around a **domain-specific language** based on cube turn sequences plus loops and conditional branching.
 
 ## Expected features
 
@@ -16,10 +24,6 @@ In random order:
 - Gather all used algorithms and display them in a consolidated list to learn the method
 - Support canonical/simplest way of defining algorithms, including algorithms with variable moves
 - Support creation of reflections and inverses see https://www.mzrg.com/rubik/mirrors.shtml
-
-
-
-
 
 
 https://ruwix.com/twisty-puzzles/
@@ -96,17 +100,10 @@ From https://www.worldcubeassociation.org/regulations/#12a
 12h2) Clockwise, 120 degrees: R (the layer around the farthest visible bottom-right vertex), U (the layer around the farthest visible upper vertex), L (the layer around the farthest visible bottom-left vertex), B (the layer around the farthest non-visible back vertex).
 12h3) Counter-clockwise, 120 degrees: R' (the layer around the farthest visible bottom-right vertex), U' (the layer around the farthest visible upper vertex), L' (the layer around the farthest visible bottom-left vertex), B' (the layer around the farthest non-visible back vertex).
 
+https://meep.cubing.net/wcanotation.html
 
-
-See https://meep.cubing.net/wcanotation.html
 https://www.cubelelo.com/blogs/cubing/understanding-rubik-s-cube-notation-for-every-wca-puzzle
-
 
 https://ruwix.com/the-rubiks-cube/different-rubiks-cube-solving-methods/roux-method/
 
-
-
 https://www.speedsolving.com/wiki/index.php/Commutators_and_Conjugates
-
-
-
