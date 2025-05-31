@@ -1,8 +1,11 @@
-# Welcome to twisty documentation
+# Welcome to the twisty documentation!
+
+
+# Python API Reference
 
 ```{toctree}
 :maxdepth: 2
-cube.md
+:hidden:
+api/index
+
 ```
-
-
